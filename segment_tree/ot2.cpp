@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+#define ENDL "\n"
+#define ff first 
+#define ss second  
+#define all(x) (x).begin(), (x).end()
+#define endd return 0;
+#define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+using ll = long long;
+using namespace std;
+
+int w[4005];
+vector<int> massive(4005);
+
+int insert(int v, int left, int right){
+    if(left == right){
+        w[v] = massive[left - 1];
+    } else{
+        int middle = (left + right) / 2;
+        insert(2 * v, left, middle);
+        insert(2 * v + 1, middle + 1, right);
+        w[v] = min(w[2 * v], w[2 * v + 1]);
+    }
+}
+
+int give_ans(int v, int left, int right, int L, int R){
+    if(L <= left and right <= R){
+        return w[v];
+    }
+    if(R < left or L > right){
+        return INT_MAX;
+    }
+    int middle = (right + left) / 2;
+    return min(give_ans(2 * v, left, middle, L, R), give_ans(2 * v + 1, middle + 1, right, L, R));
+}
+
+signed main(){
+    
+    goodluck
+    freopen("stupid_rmq.in", "r", stdin);
+    freopen("stupid_rmq.out", "w", stdout);
+
+    int n;
+    cin >> n;
+    
+    for(int i = 0; i < n; i++){
+        cin >> massive[i];
+    }
+    insert(1, 1, n);
+    int q;
+    cin >> q;
+    while(q--){
+        int l, r;
+        cin >> l >> r;
+        cout << give_ans(1, 1, n, l, r) << ENDL;
+    }
+
+    
+
+
+    endd
+}

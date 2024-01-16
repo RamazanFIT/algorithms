@@ -6,7 +6,7 @@
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define endd return 0;
-#define repeat(x) for(int _ = 0; _ < x; _++)
+#define repeat(x) for(int mmmmm = 0; mmmmm < x; mmmmm++)
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
 using ll = long long;
 using namespace std;

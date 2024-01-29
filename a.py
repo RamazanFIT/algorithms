@@ -1,23 +1,17 @@
-import random
-n = int(input())
-
-def get(a):
-    a = str(a)
-    ret = 0
-    for i in a:
-        ret += int(i)
-    return ret
-big = 10 ** 30
-for _ in range(n):
-    a, b = map(int, input().split())
-    if(get(a) % 9 != get(b) % 9):
-        print("NO")
+def spygame(num):
+    word007 = ""
+    for i in num:
+        word007 += str(i)
+    if word007.find('007') != -1:
+        return True
     else:
-        k = random.randint(0, big)
-        while True:
-            if(get(a + k) == get(b + k)):
-                print("YES", k)
-                break
-            k = random.randint(0, big)
-            
-    
+        return False 
+
+someList = list(map(int, input().split()))
+
+answer = bool(spygame(someList))
+
+print(answer)
+
+
+

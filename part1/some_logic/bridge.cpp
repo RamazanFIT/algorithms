@@ -60,12 +60,14 @@ signed main(){
     t_in = vector<int>(n + 1);
     Timer = 0;
     visited = vector<bool>(n + 1);
-    
+    map<pair<int, int>, int> ansss;
     for(int i = 0; i < m; i++){
         int a, b;
         cin >> a >> b;
         g[a].pb(b);
         g[b].pb(a);
+        ansss[{a, b}] = i + 1;
+        ansss[{b, a}] = i + 1;
     }
     
     dfs(1, 1);
@@ -73,10 +75,12 @@ signed main(){
         cout << 0;
         return 0;
     }
-
+    cout << ans.size() << ENDL;
     for(auto it : ans){
         cout << it.first << " " << it.second << ENDL;
+        // cout << ansss[{it.first, it.second}] << ENDL;
     }
+
     
     
 

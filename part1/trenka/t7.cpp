@@ -7,6 +7,7 @@
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define endd return 0;
+#define int ll
 #define repeat(x) for(int _ = 0; _ < x; _++)
 #define print(massive) for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
@@ -20,7 +21,11 @@ signed main(){
     // freopen("std.out", "w", stdout);
 
     
-    
+    int x = 0;
+    for(int i = 1; i <= 30; i++){
+        x += pow(2, i);
+    }
+    cout << x;
 
 
     endd

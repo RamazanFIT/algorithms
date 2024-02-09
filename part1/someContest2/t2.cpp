@@ -19,7 +19,20 @@ signed main(){
     // freopen("std.in", "r", stdin);
     // freopen("std.out", "w", stdout);
 
-    
+    int n;
+    cin >> n;
+    if(n % 2 == 0){
+        cout << n / 2 << ENDL;
+        repeat(n / 2){
+            cout << 2 << " ";
+        }
+    } else{
+        cout << (n - 3) / 2 + 1 << ENDL;
+        repeat((n - 3) / 2){
+            cout << 2 << " ";
+        }
+        cout << 3;
+    }
     
 
 

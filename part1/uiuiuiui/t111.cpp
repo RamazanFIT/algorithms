@@ -19,7 +19,15 @@ signed main(){
     // freopen("std.in", "r", stdin);
     // freopen("std.out", "w", stdout);
 
-    
+    int n;
+    cin >> n;
+    cout << n;
+    {
+        int n;
+        cin >> n;
+        cout << n;
+    }
+    cout << n;
     
 
 

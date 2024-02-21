@@ -1,5 +1,4 @@
-// Bismillah 
-// لا إله إلا الله محمد رسول الله
+// Bismillah
 #include <bits/stdc++.h>
 #define ENDL "\n"
 #define ff first 
@@ -13,8 +12,10 @@
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
 using ll = long long;
 using namespace std;
+vector<vector<int>> g;
 
 void solve(int ccase){
+    int n, m;cin >> n >> m;
     
 }
 
@@ -24,10 +25,9 @@ signed main(){
     // freopen("std.in", "r", stdin);
     // freopen("std.out", "w", stdout);
 
-    int t = 1;
-    // cin >> t;
-    repeat(t) solve(_);
+    int t;cin>>t;repeat(t) solve(_ + 1);
     
+
 
     endd
 }

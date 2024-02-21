@@ -1,5 +1,4 @@
-// Bismillah 
-// لا إله إلا الله محمد رسول الله
+// Bismillah
 #include <bits/stdc++.h>
 #define ENDL "\n"
 #define ff first 
@@ -14,20 +13,31 @@
 using ll = long long;
 using namespace std;
 
-void solve(int ccase){
-    
-}
 
+struct edge{
+    bool deleted;
+    int v;
+};
 signed main(){
     
     goodluck
     // freopen("std.in", "r", stdin);
     // freopen("std.out", "w", stdout);
 
-    int t = 1;
-    // cin >> t;
-    repeat(t) solve(_);
     
+    vector<edge> g(2);
+
+    edge x = edge();
+    x.deleted = true;
+    x.v = 5;
+    g[0] = x;
+    g[1] = x;
+
+    g[0].deleted = false;
+
+    cout << g[1].deleted;
+    
+
 
     endd
 }

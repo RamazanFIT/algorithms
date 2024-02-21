@@ -15,7 +15,20 @@ using ll = long long;
 using namespace std;
 
 void solve(int ccase){
-    
+    vector<int> m(1);
+    vector<int> m1(1);
+    m[100] = 12;
+    // cout << m[100];
+    for(int i = 0; i < 1000; i++){
+        m[i] = i;
+    }
+    // print(m);
+    for(int i = 0; i < 1000; i++){
+        // m[i] = i;
+        cout << m[i] << " ";
+    }
+    cout << ENDL;
+    cout <<m1[0];
 }
 
 signed main(){

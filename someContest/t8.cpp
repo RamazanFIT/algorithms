@@ -1,0 +1,132 @@
+// Bismillah
+#include <bits/stdc++.h>
+#define ENDL "\n"
+#define ff first 
+#define ss second  
+#define pb push_back
+#define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
+#define endd return 0;
+#define repeat(x) for(int _ = 0; _ < x; _++)
+#define print(massive) for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
+#define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+using ll = long long;
+using namespace std;
+vector<int> color, used, topsort;
+vector<vector<int>> g, anti_g;
+
+
+int getNumber(int i){
+    if(i > 0)
+    return 2 * i;
+    return -2 * i + 1;
+}
+
+int inv(int i){
+    return i ^ 1;
+}
+
+void dfs(int v){
+    if(used[v]) return;
+    used[v] = true;
+    
+    for(auto w : g[v]){
+        dfs(w);
+    }
+    topsort.pb(v);
+}
+
+void dfs2(int v, int cl){
+    if(color[v] != -1) return;
+    color[v] = cl;
+    
+    for(auto w : anti_g[v]){
+        dfs2(w, cl);
+    }
+}
+
+void slv(int ccase){
+    int n, m;cin>> n >> m;
+    topsort.clear();
+    anti_g = g = vector<vector<int>>(2 * (n + 1));
+    used = vector<int>(2 * (n + 1));
+    color = vector<int>(2 * (n + 1), -1);
+
+    repeat(m){
+        int a, b, c;
+        cin >> a >> b >> c;
+    
+        a = getNumber(a);
+        b = getNumber(b);
+
+        if(c){
+            // 1 - 1
+            g[a].pb(b);
+            // g[b].pb(a);
+            g[inv(a)].pb(inv(b));
+            // g[inv(b)].pb(inv(a));
+
+            // anti_g[a].pb(b);
+            anti_g[b].pb(a);
+            // anti_g[inv(a)].pb(inv(b));
+            anti_g[inv(b)].pb(inv(a));
+        } else{
+            // 1 - 0
+            // 0 - 1
+            g[inv(a)].pb(b);
+            // g[inv(b)].pb(a);
+            g[a].pb(inv(b));
+            // g[b].pb(inv(a));
+
+            // anti_g[inv(a)].pb(b);
+            anti_g[inv(b)].pb(a);
+            // anti_g[a].pb(inv(b));
+            anti_g[b].pb(inv(a));
+            
+
+
+        }
+        
+        
+    }
+
+    for(int i = 2; i <= 2 * n; i++){
+        dfs(i);
+    }
+    
+    reverse(all(topsort));
+    int cl = 0;
+    for(auto w : topsort){
+        if(color[w] == -1){
+            dfs2(w, cl++);
+        }
+    }
+    vector<int> ans;
+    // print(color);
+    for(int i = 2; i <= 2 * n; i+=2){
+        if(color[i] == -1 or color[inv(i)] == -1) continue;
+        if(color[i] == color[inv(i)]){
+            cout << "Impossible" << ENDL;
+            return;
+        }
+        if(color[i] > color[inv(i)]){
+            ans.pb(i / 2);
+        }
+    }
+    cout << ans.size() << ENDL;
+    for(auto it : ans) cout << it << " "; cout << ENDL;
+
+}
+
+signed main(){
+    
+    goodluck
+    // freopen("std.in", "r", stdin);
+    // freopen("std.out", "w", stdout);
+
+    int t;t=1;repeat(t) slv(_ + 1);
+    
+
+
+    endd
+}

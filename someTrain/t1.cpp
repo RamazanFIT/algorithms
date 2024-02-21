@@ -1,5 +1,4 @@
-// Bismillah 
-// لا إله إلا الله محمد رسول الله
+// Bismillah
 #include <bits/stdc++.h>
 #define ENDL "\n"
 #define ff first 
@@ -14,20 +13,15 @@
 using ll = long long;
 using namespace std;
 
-void solve(int ccase){
-    
-}
-
 signed main(){
     
     goodluck
     // freopen("std.in", "r", stdin);
     // freopen("std.out", "w", stdout);
 
-    int t = 1;
-    // cin >> t;
-    repeat(t) solve(_);
     
+    
+
 
     endd
 }

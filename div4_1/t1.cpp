@@ -15,7 +15,21 @@ using ll = long long;
 using namespace std;
 
 void solve(int ccase){
-    
+    string s;
+    cin >> s;
+    int cnt1 = 0;
+    int cnt2 = 0;
+    for(auto a : s){
+
+        if(a == 'A') cnt1++;
+        else cnt2++;
+    }
+    if(cnt1 > cnt2){
+        cout << "A" << ENDL;
+    } else {
+        cout << "B" << ENDL;
+
+    }
 }
 
 signed main(){
@@ -25,7 +39,7 @@ signed main(){
     // freopen("std.out", "w", stdout);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

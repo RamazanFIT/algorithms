@@ -27,6 +27,7 @@ int n;
 #define MID (xl + xr) / 2
 #define LL xl, MID
 #define RR MID, xr 
+#define INF LLONG_MAX / 4
 
 
 void build1(int x, int xl, int xr){
@@ -116,7 +117,7 @@ void build2(int x, int xl, int xr){
 }
 
 void push2(int x, int xl, int xr){
-    if(d2[x] != -1){
+    if(d2[x] != INF){
         dt[L].first = d2[x] * d2[x] * (MID - xl);
         dt[R].first = d2[x] * d2[x] * (xr - MID);
         dt[L].second = (MID - xl) * d2[x];
@@ -125,7 +126,7 @@ void push2(int x, int xl, int xr){
         d2[R] = d2[x];
         dd2[L] = 0;
         dd2[R] = 0;
-        d2[x] = -1;
+        d2[x] = INF;
     }
 
     if(dd2[x] != 0){
@@ -153,28 +154,32 @@ void setting2(int l, int r, int v, int x, int xl, int xr){
     push2(x, xl, xr);
     setting2(l, r, v, L, LL);
     setting2(l, r, v, R, RR);
-    tt[x] = tt[L] + tt[R];
+    dt[x].ff = dt[L].ff + dt[R].ff;
+    dt[x].ss = dt[L].ss + dt[R].ss;
 }
 
 void change2(int l, int r, int v, int x, int xl, int xr){
 
     if(xl >= r or xr <= l) return;
     if(xl >= l and xr <= r){
-        tt[x] += v * v * (xr - xl) + 2 * v * get1(xl, xr, 0, 0, n);
+        dt[x].ff += v * v * (xr - xl) + 2 * v * dt[x].ss;
+        dt[x].ss += v * (xr - xl);
         dd2[x] += v;
         return;
     }
     push2(x, xl, xr);
     change2(l, r, v, L, LL);
     change2(l, r, v, R, RR);
-    tt[x] = tt[L] + tt[R];
+    dt[x].ff = dt[L].ff + dt[R].ff;
+    dt[x].ss = dt[L].ss + dt[R].ss;
+    
 }
 
 int get2(int l, int r, int x, int xl, int xr){
 
     if(xl >= r or xr <= l) return 0;
     if(xl >= l and xr <= r){
-        return tt[x];
+        return dt[x].ff;
     }
     push2(x, xl, xr);
     return get2(l, r, L, LL) + get2(l, r, R, RR);
@@ -189,10 +194,11 @@ void solve(int ccase){
     int q;cin>>n >> q;
     mass = vii(n, 0);
     dd2 = dd = t = tt = vii(4 * (n + 1), 0);
-    d = d2 = vii(4 * (n + 1), -1);
+    d = d2 = vii(4 * (n + 1), INF);
+    dt = vector<pair<int, int>>(4 * (n + 1));
     // repeat(n) cin >> mass[_];
-    // build1(0, 0, n);
-    // build2(0, 0, n);
+
+    build2(0, 0, n);
 
     repeat(q){
         int a;
@@ -200,11 +206,11 @@ void solve(int ccase){
         if(a == 1){
             int l, r, v;cin>>l>>r>>v;
             change2(l - 1, r, v, 0, 0, n);
-            change1(l - 1, r, v, 0, 0, n);
+            // change1(l - 1, r, v, 0, 0, n);
 
         } else if(a == 0){
             int l, r, v;cin>>l>>r>>v;
-            setting1(l - 1, r, v, 0, 0, n);
+            // setting1(l - 1, r, v, 0, 0, n);
             setting2(l - 1, r, v, 0, 0, n);
         } else{
             int l, r;cin>>l>>r;

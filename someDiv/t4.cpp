@@ -33,6 +33,22 @@ using ll = long long;
 using namespace std;
 
 void solve(int ccase){
+    int n;get(n)
+
+    vii mass(n);
+    repeat(n) get(mass[_])
+
+    int x = mass[1];
+
+    FORW(3, n, 2){
+        x ^= mass[i];
+    }
+    
+    if(x == 0){
+        cout << "second" << ENDL;
+    } else{
+        cout << "first" << ENDL;
+    }
     
 }
 
@@ -43,7 +59,7 @@ signed main(){
     // freopen("std.out", "w", stdout);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

@@ -15,25 +15,32 @@
 #define ff first 
 #define ss second  
 #define pb push_back
-#define int ll
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define endd return 0;
+#define int ll
 #define repeat(x) for(int _ = 0; _ < x; _++)
 #define vii vector<int>
 #define mii map<int, int>
 #define vvi vector<vector<int>>
-#define FORW(leftb,rightb,way) for(int i = leftb; i < rightb; i+=way)
-#define FOR(leftb,rightb) for(int i = leftb; i < rightb; i+=1)
 #define print(massive) for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
-#define get(a) cin >> a;
-
 using ll = long long;
 using namespace std;
 
 void solve(int ccase){
-    
+    int n;
+    cin >> n;
+    vii v(n);repeat(n) cin >> v[_];
+    int x = v[0];
+    for(int i = 1; i < n; i++){
+        x ^= v[i];
+    }
+    if(x != 0){
+        cout << "first" << ENDL;
+    } else{
+        cout << "second" << ENDL;
+    }
 }
 
 signed main(){
@@ -43,7 +50,7 @@ signed main(){
     // freopen("std.out", "w", stdout);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

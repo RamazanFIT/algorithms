@@ -1,7 +1,7 @@
 /* 
     Bismillah 
  لا إله إلا الله محمد رسول الله
- Al'-Phatixa
+ Al-Phatixa
  بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
  ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
  ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
@@ -15,7 +15,6 @@
 #define ff first 
 #define ss second  
 #define pb push_back
-#define int ll
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define endd return 0;
@@ -23,17 +22,21 @@
 #define vii vector<int>
 #define mii map<int, int>
 #define vvi vector<vector<int>>
-#define FORW(leftb,rightb,way) for(int i = leftb; i < rightb; i+=way)
-#define FOR(leftb,rightb) for(int i = leftb; i < rightb; i+=1)
 #define print(massive) for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
-#define get(a) cin >> a;
-
 using ll = long long;
 using namespace std;
 
 void solve(int ccase){
-    
+    int n;
+    cin>>n;
+    vii mass(n);repeat(n) cin >> mass[_];
+    sort(all(mass));
+    int i = mass[n - 1];
+    int j = mass[0];
+    int k = mass[n - 2];
+    int l = mass[1];
+    cout << abs(i - j) + abs(j - k) + abs(k - l) + abs(l - i) << ENDL;
 }
 
 signed main(){
@@ -43,7 +46,7 @@ signed main(){
     // freopen("std.out", "w", stdout);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

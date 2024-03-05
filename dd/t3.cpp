@@ -15,25 +15,47 @@
 #define ff first 
 #define ss second  
 #define pb push_back
-#define int ll
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define endd return 0;
 #define repeat(x) for(int _ = 0; _ < x; _++)
 #define vii vector<int>
+#define int ll
 #define mii map<int, int>
 #define vvi vector<vector<int>>
-#define FORW(leftb,rightb,way) for(int i = leftb; i < rightb; i+=way)
-#define FOR(leftb,rightb) for(int i = leftb; i < rightb; i+=1)
 #define print(massive) for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
-#define get(a) cin >> a;
-
 using ll = long long;
 using namespace std;
 
+int get(int x){
+    int cnt = 0;
+    while(x > 0){
+        x/=2;
+        cnt++;
+    }
+    return  cnt;
+}
+
+
 void solve(int ccase){
-    
+    int n, m;
+    cin >> n >> m;
+    if(get(m) > get(n)){
+        cout << -1 << ENDL;
+        return;
+    }
+    // cout << (481885160128643072 ^ 45035996273704960);
+    // cout << (481885160128643072 <= (436849163854938112 ^ 481885160128643072));
+    // cout << (7 ^ 4);
+    // cout << (481885160128643072 ^ 436849163854938112);
+    int x = (n ^ m);
+    if(((x ^ n) >= n) or x >= n){
+        cout << -1 << ENDL;
+        return;
+    }
+    cout << 1 << ENDL;
+    cout << n << " " << m << ENDL;
 }
 
 signed main(){
@@ -43,7 +65,7 @@ signed main(){
     // freopen("std.out", "w", stdout);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

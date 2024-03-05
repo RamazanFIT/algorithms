@@ -15,7 +15,6 @@
 #define ff first 
 #define ss second  
 #define pb push_back
-#define int ll
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define endd return 0;
@@ -23,17 +22,42 @@
 #define vii vector<int>
 #define mii map<int, int>
 #define vvi vector<vector<int>>
-#define FORW(leftb,rightb,way) for(int i = leftb; i < rightb; i+=way)
-#define FOR(leftb,rightb) for(int i = leftb; i < rightb; i+=1)
 #define print(massive) for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
-#define get(a) cin >> a;
-
+#define put(a) cin >> a;
 using ll = long long;
 using namespace std;
 
 void solve(int ccase){
+    int n, k;
+    put(n) put(k)
+
+    vii mass(n);
+    repeat(k) put(mass[_])
+
+
+    vii mask(n + 100);
     
+    repeat(n){
+        int j = _ + 1;
+        bool flag = true;
+        
+        for(int i = 0; i < k; i++){
+            if(j - mass[i] >= 0){
+                if(mask[j - mass[i]] == 0){
+                    flag = false;
+                    break;
+                }
+            }
+        }
+        if(flag){
+            cout << "L";
+        } else{
+            mask[j]++;
+            cout << "W";
+        }
+    }
+
 }
 
 signed main(){

@@ -34,6 +34,7 @@ using ll = long long;
 using namespace std;
 
 void solve(int ccase){
+
     
 }
 

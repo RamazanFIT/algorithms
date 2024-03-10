@@ -25,28 +25,61 @@
 #define vvi vector<vector<int>>
 #define FORW(leftb,rightb,way) for(int i = leftb; i < rightb; i+=way)
 #define FOR(leftb,rightb) for(int i = leftb; i < rightb; i+=1)
-#define print(massive) for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
+#define print(massive) \
+    for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
 #define get(a) cin >> a;
 
 using ll = long long;
 using namespace std;
+vii mass;
+vii res;
+int mex(int n){
+    set<int> st;
+    for(int i = 1; i < n % 2 + n / 2; i++){
+        st.insert((mass[i] ^ mass[n - i]));
+    }
 
+    int cnt = 0;
+    while(st.find(cnt) != st.end()){
+        cnt++;
+    }
+    return cnt;
+}
 
 void solve(int ccase){
-
-
-
+    int n;
+    get(n)
+    
+    int x = 1;
+    if(n < 1300){
+        x = mass[n];
+    }
+    if(x != 0) cout << res[n] << ENDL;
+    else cout << 0 << ENDL;
 }
 
 signed main(){
     
-    goodluck
-    // freopen("std.in", "r", stdin);
-    // freopen("std.out", "w", stdout);
+    goodluck 
+    
+    int N = 10001; 
+    res = mass = vii(N);
 
+    for(int i = 1; i < N; i++){
+        mass[i] = mex(i);
+    }
+
+    for(int i = 1; i < N; i++){
+        int cnt = 0;
+        for(int j = 1; j < i % 2 + i / 2; j++){
+            if(!(mass[j] ^ mass[i - j])) cnt++;
+        }
+        res[i] = cnt;
+    }
+    
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

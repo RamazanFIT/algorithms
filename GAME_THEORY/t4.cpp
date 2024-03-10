@@ -34,17 +34,18 @@ using ll = long long;
 using namespace std;
 
 void solve(int ccase){
-    
+    int n;
+    get(n)
+    if(!(n % 2)) cout << "A" << ENDL;
+    else cout << "B" << ENDL;
 }
 
 signed main(){
     
-    goodluck
-    // freopen("std.in", "r", stdin);
-    // freopen("std.out", "w", stdout);
-
+    goodluck 
+    
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

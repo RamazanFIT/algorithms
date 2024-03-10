@@ -32,15 +32,17 @@
 
 using ll = long long;
 using namespace std;
-
+int x;
 void solve(int ccase){
-    
+    while(cin>>x){
+        cout << x << ", ";
+    }
 }
 
 signed main(){
     
     goodluck
-    // freopen("std.in", "r", stdin);
+    freopen("std.in", "r", stdin);
     // freopen("std.out", "w", stdout);
 
     int t = 1;

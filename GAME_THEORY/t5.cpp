@@ -32,9 +32,25 @@
 
 using ll = long long;
 using namespace std;
+const int N = 1001;
+vii mass = vii(N);
+
+int mex(set<int> a){
+    int cnt = 0;
+    while(a.find(cnt) != a.end()){
+        cnt++;
+    }
+    return cnt;
+}
 
 void solve(int ccase){
-    
+    int n;
+    cin >> n;
+    if(mass[n] != 0){
+        cout << "1" << ENDL;
+    } else{
+        cout << "2" << ENDL;
+    }
 }
 
 signed main(){
@@ -42,6 +58,29 @@ signed main(){
     goodluck
     // freopen("std.in", "r", stdin);
     // freopen("std.out", "w", stdout);
+    int q = 3;
+    mass[1] = 1;
+    mass[2] = 2;
+    mass[3] = 0;
+    for(int i = 4; i < N; i++){
+        if(i % q == 1){
+            set<int> a;
+            a.insert(mass[i - 1]);
+            a.insert(mass[i - 3]);
+            mass[i] = mex(a);
+        } else if(i % q == 2){
+            set<int> a;
+            a.insert(mass[i - 1]);
+            a.insert(mass[i - 2]);
+            a.insert(mass[i - 3]);
+            mass[i] = mex(a);
+        } else{
+            set<int> a;
+            a.insert(mass[i - 1]);
+            a.insert(mass[i - 2]);
+            mass[i] = mex(a);
+        }
+    }
 
     int t = 1;
     // cin >> t;

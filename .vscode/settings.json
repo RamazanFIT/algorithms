@@ -91,6 +91,7 @@
         "__memory": "cpp",
         "functional": "cpp",
         "iterator": "cpp",
-        "sh": "c"
+        "sh": "c",
+        "stdc++.h": "c"
     }
 }

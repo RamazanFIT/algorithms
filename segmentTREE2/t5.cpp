@@ -28,21 +28,27 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
-template<typename T>
-void get(T &a) {std::cin >> a;}
-template<typename T, typename... Args>
-void get(T &a, Args&... args) {std::cin >> a;get(args...);}
-template<typename T>
-void put(const T &a) {std::cout << a;}
-template<typename T, typename... Args>
-void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
+#define get(a) cin >> a;
 
 using ll = long long;
 using namespace std;
 
 void solve(int ccase){
-    
+    set<int> a, b;
+    a = {1, 20, 25};
+    b = {2, 18, 24};
+    // set<int> c;
+    // merge(all(a), all(b), back_insert_iterator(c));
+    // // print(c);
+    // for(auto it : c) cout << it << " ";
+    // cout >> (a.find(1));
+    if(a.lower_bound(26) != a.end()){
+        cout << distance(a.begin(), a.lower_bound(26));
+    }
+
 }
+
+
 
 signed main(){
     

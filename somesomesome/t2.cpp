@@ -28,27 +28,49 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
-template<typename T>
-void get(T &a) {std::cin >> a;}
-template<typename T, typename... Args>
-void get(T &a, Args&... args) {std::cin >> a;get(args...);}
-template<typename T>
-void put(const T &a) {std::cout << a;}
-template<typename T, typename... Args>
-void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
+#define get(a) cin >> a;
 
 using ll = long long;
 using namespace std;
 
 void solve(int ccase){
-    
+    vii mass;
+    for(int  i= 1; i <= 6; i++) mass.pb(i);
+    int n = mass.size();
+    int a = 0;
+    map<pair<int, int>, int> mapa;
+    do
+    {
+        int x, y;
+        x = mass[0];
+        int cnt1 = 0;
+        int cnt2 = 0;
+        y = mass[n - 1];
+        for(int i = 0; i < n; i++){
+            if(x <= mass[i]){
+                cnt1++;
+                x = mass[i];
+            }
+        }
+        for(int i = n - 1; i >= 0; i--){
+            if(mass[i] >= y){
+                cnt2++;
+                y = mass[i];
+            }
+        }
+        // cout << a++ << " " << cnt1 << " " << cnt2 << ENDL;
+        mapa[{cnt1, cnt2}]++;
+    } while (next_permutation(all(mass)));
+    for(auto it : mapa){
+        cout << it.first.ff << " " << it.ff.ss << " " << it.ss << ENDL;
+    }
 }
 
 signed main(){
     
     goodluck
     // freopen("std.in", "r", stdin);
-    // freopen("std.out", "w", stdout);
+    freopen("std.out", "w", stdout);
 
     int t = 1;
     // cin >> t;

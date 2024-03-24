@@ -40,8 +40,45 @@ void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 using ll = long long;
 using namespace std;
 
+#define L 2 * x + 1
+#define R L + 1
+#define M (xl + xr) / 2
+#define LL xl, M
+#define RR M, xr 
+
+vector<vector<int>> t;
+vii massive;
+
+void build(int x, int xl, int xr){
+    if(xr - xl == 1){
+        t[x].pb(massive[xl]);
+        return;
+    }
+    build(L, LL);
+    build(R, RR);
+    merge(all(t[L]), all(t[R]), back_insert_iterator(t[x]));
+}
+
+int getans(int l, int r, int v, int x, int xl, int xr){
+    if(xl >= r or xr <= l) return 0;
+    if(xl >= l and xr <= r){
+        // return (lower_bound(all(t[x]), v) - t[x].begin());
+        return distance(t[x].begin(), lower_bound(all(t[x]), v));
+    }
+    return getans(l, r, v, L, LL) + getans(l, r, v, R, RR);
+}
+
 void solve(int ccase){
-    
+    int n; get(n);
+    massive = vii(n);
+    repeat(n) get(massive[_]);
+    t = vvi(4 * (n + 1));
+    build(0, 0, n);
+    int q;get(q);
+    repeat(q){
+        int l, r, v;get(l, r, v);
+        put(getans(l - 1, r, v, 0, 0, n), ENDL);
+    }
 }
 
 signed main(){

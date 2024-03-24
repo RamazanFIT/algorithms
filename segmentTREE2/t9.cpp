@@ -40,8 +40,79 @@ void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 using ll = long long;
 using namespace std;
 
+
+#define L 2 * x + 1
+#define R L + 1
+#define M (xl + xr) / 2
+#define LL xl, M
+#define RR M, xr 
+
+vii a, d, dl;
+
+void push(int xl, int xr, int x){
+    if(dl[x] + d[x] + a[x]){
+        d[L] += d[x];
+        d[R] += d[x];
+        dl[L] += dl[x];
+        dl[R] += dl[x];
+        a[L] += a[x];
+        a[R] += a[x];
+        d[x] = 0;
+        dl[x] = 0;
+        a[x] = 0;
+    }
+}
+
+void change(int l, int r, int aa, int dd, int x, int xl, int xr){
+    if(xl >= r or xr <= l) return;
+
+    if(xl >= l and xr <= r){
+        d[x] += dd;
+        dl[x] += dd * l;
+        a[x] += aa;
+        return;
+    }
+    push(xl, xr, x);
+
+    change(l, r, aa, dd, L, LL);
+    change(l, r, aa, dd, R, RR);
+
+}
+
+int f(int a, int d, int i, int dl){
+    return a + d * i - dl;
+}
+
+int getans(int i, int x, int xl, int xr){
+    if(xr - xl == 1){
+        return f(a[x], d[x], xl, dl[x]);
+    }
+    push(xl, xr, x);
+    if(i < M){
+        return getans(i, L, LL);
+    } else{
+        return getans(i, R, RR);
+    }
+}
+
+
+
 void solve(int ccase){
+    int n, q;get(n, q);
     
+    a = d = dl = vii(4 * (n + 1));
+    
+
+    repeat(q){
+        int type;get(type);
+        if(type == 2){
+            int i;get(i);
+            put(getans(i - 1, 0, 0, n), ENDL);
+        } else{
+            int l, r, aa, dd;get(l, r, aa, dd);
+            change(l - 1, r, aa, dd, 0, 0, n);
+        }
+    }
 }
 
 signed main(){

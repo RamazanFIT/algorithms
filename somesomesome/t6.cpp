@@ -28,19 +28,49 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
-template<typename T>
-void get(T &a) {std::cin >> a;}
-template<typename T, typename... Args>
-void get(T &a, Args&... args) {std::cin >> a;get(args...);}
-template<typename T>
-void put(const T &a) {std::cout << a;}
-template<typename T, typename... Args>
-void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
+#define get(a) cin >> a;
 
 using ll = long long;
 using namespace std;
 
 void solve(int ccase){
+    int n;
+    cin >> n;
+    vii mass(n);
+    repeat(n) get(mass[_])
+
+    vvi v;
+    for(auto it : mass){
+        if(it < 10){
+            v.pb(vii{it});
+        } else{
+            v.pb(vii{min(it%10, it/10), max(it%10, it/10)});
+        }
+    }
+    int check = v[0][0];
+
+    for(int i = 1; i < n; i++){
+        if(v[i].size() >= 2){
+            if(v[i][1] < check){
+                cout << "NO" << ENDL;
+                return;
+            } else{
+                if(v[i][0] >= check){
+                    check = v[i][0];
+                } else{
+                    check = v[i][1];
+                }
+            }
+        } else{
+            if(v[i][0] < check){
+                cout << "NO" << ENDL;
+                return;
+            } else{
+                check = v[i][0];
+            }
+        }
+    }
+    cout << "YES" << ENDL;
     
 }
 
@@ -48,10 +78,10 @@ signed main(){
     
     goodluck
     // freopen("std.in", "r", stdin);
-    // freopen("std.out", "w", stdout);
+    freopen("std.out", "w", stdout);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

@@ -28,20 +28,35 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
-template<typename T>
-void get(T &a) {std::cin >> a;}
-template<typename T, typename... Args>
-void get(T &a, Args&... args) {std::cin >> a;get(args...);}
-template<typename T>
-void put(const T &a) {std::cout << a;}
-template<typename T, typename... Args>
-void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
+#define get(a) cin >> a;
 
 using ll = long long;
 using namespace std;
+// const int n = 10;
+
+// void printTree(int idx, int space) {
+//     if (idx < n) {
+//         printTree(2 * idx + 2, space + 4);
+//         cout << string(space, ' ') << idx << endl;
+//         printTree(2 * idx + 1, space + 4);
+//     }
+// }
+
+#define L 2 * x + 1
+#define R 2 * x + 2
+
+void printTree(int x, int maxn, int tab=0){
+    if(x >= maxn) return;
+    printTree(R, maxn, tab + 4);
+    // cout << string(tab, '|') << x << ENDL;
+    repeat(tab) cout << "| " ; cout << x << ENDL;
+    printTree(L, maxn, tab + 4);
+}
 
 void solve(int ccase){
-    
+    // printTree(0, 0);
+
+    printTree(0, 10);
 }
 
 signed main(){

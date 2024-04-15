@@ -31,7 +31,6 @@ int kmp(string s, string a){
         if(a.size() == prefixfunction[i]) ans++;
     }
     return ans;
-    
 }
 
 signed main(){

@@ -92,6 +92,7 @@
         "functional": "cpp",
         "iterator": "cpp",
         "sh": "cpp",
-        "stdc++.h": "cpp"
+        "stdc++.h": "cpp",
+        "charconv": "cpp"
     }
 }

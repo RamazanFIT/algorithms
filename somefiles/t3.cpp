@@ -15,7 +15,7 @@
 #define ff first 
 #define ss second  
 #define pb push_back
-#define int ll
+#define int double
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define endd return 0;
@@ -40,17 +40,26 @@ void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 using ll = long long;
 using namespace std;
 
-
-
 void solve(int ccase){
+    int a1, a2, b1, b2, c1, c2;
+
+    get(a1, b1, c1);
+    get(a2, b2, c2);
+
+    int x = (c2 * b1 - c1 * b2) / (a1 * b2 - a2 * b1);
+    int y = (a2 * c1 - a1 * c2) / (a1 * b2 - a2 * b1);
+    put(fixed, setprecision(12));
+    put(x," ", y);
+
     
+
 }
 
 signed main(){
     
     goodluck
-    // freopen("std.in", "r", stdin);
-    // freopen("std.out", "w", stdout);
+    freopen("intersec1.in", "r", stdin);
+    freopen("intersec1.out", "w", stdout);
 
     int t = 1;
     // cin >> t;

@@ -40,10 +40,31 @@ void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 using ll = long long;
 using namespace std;
 
+struct point{
+    double x, y;
+};
 
+double getPolygonS(vector<point>  & massive){
+    double ans = 0;
+    for(int i = 1; i < massive.size(); i++){
+        double x1, x2, y1, y2;
+        x1 = massive[i - 1].x;
+        x2 = massive[i].x;
+        y1 = massive[i - 1].y;
+        y2 = massive[i].y;
+        ans += (y1 + y2) * (x2 - x1);
+    }
+    ans += (massive[massive.size() - 1].y + massive[0].y) * (massive[0].x - massive[massive.size() - 1].x);
+    return abs(ans / 2);
+
+}
 
 void solve(int ccase){
-    
+    int n;get(n);
+    vector<point> massive(n);
+    repeat(n) get(massive[_].x, massive[_].y);
+    double ans = getPolygonS(massive);
+    put(fixed, setprecision(3), ans);
 }
 
 signed main(){

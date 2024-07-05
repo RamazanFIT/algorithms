@@ -31,7 +31,8 @@
 
 using ll = long long;
 using namespace std;
-vii p, r;
+
+vector<int> p, r;
 
 int get(int a){
     if(a != p[a]){
@@ -43,39 +44,23 @@ int get(int a){
 void join(int a, int b){
     a = get(a);
     b = get(b);
-    if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
+    if(a == b) return; // зачем соединять если они находятся в одной группе?
+    if(r[a] > r[b]){
+        swap(a, b);
+    }
     p[a] = b;
     if(r[a] == r[b]){
         r[b]++;
     }
+
 }
 
+
+
 void solve(int ccase){
-    int n, m;
-    cin >> n >> m;
-    p = r = vii(n + 1);
-    for(int i = 1; i <= n; i++){
-        p[i] = i;
-    }
-
-    repeat(m){
-        string type;
-        cin >> type;
-
-        int a, b;
-        cin >> a >> b;
-
-        if(type == "union"){
-            join(a, b);
-        } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
-        }
-    }
-    
+    // for(int i = 1; i <= n; i++){
+    //     p[i] = i;
+    // }
 }
 
 signed main(){

@@ -31,6 +31,7 @@
 
 using ll = long long;
 using namespace std;
+
 vii p, r;
 
 int get(int a){
@@ -44,38 +45,43 @@ void join(int a, int b){
     a = get(a);
     b = get(b);
     if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
-    p[a] = b;
-    if(r[a] == r[b]){
-        r[b]++;
+    if(r[a] > r[b]){
+        swap(a, b);
     }
+
+    r[b] += r[a];
+
+    p[a] = b;
+
 }
 
 void solve(int ccase){
     int n, m;
     cin >> n >> m;
-    p = r = vii(n + 1);
+
+    p = vii(n + 1);
+    r = vii(n + 1, 1);
+
     for(int i = 1; i <= n; i++){
         p[i] = i;
     }
 
-    repeat(m){
-        string type;
-        cin >> type;
-
-        int a, b;
-        cin >> a >> b;
-
-        if(type == "union"){
-            join(a, b);
-        } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
-        }
-    }
+    int cnt = n;
+    int maxx = 1;
     
+    repeat(m){
+        int a, b;cin>>a>>b;
+        
+        if(get(a) != get(b)){
+            cnt--;
+        }
+        join(a, b);
+        maxx = max(maxx, r[get(a)]);
+
+        cout << cnt << " " << maxx << ENDL;
+
+    }
+
 }
 
 signed main(){

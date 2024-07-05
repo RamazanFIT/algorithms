@@ -15,7 +15,7 @@
 #define ff first 
 #define ss second  
 #define pb push_back
-#define int ll
+// #define int ll
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define endd return 0;
@@ -28,54 +28,67 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+template<typename T>
+void get(T &a) {std::cin >> a;}
+template<typename T, typename... Args>
+void get(T &a, Args&... args) {std::cin >> a;get(args...);}
+template<typename T>
+void put(const T &a) {std::cout << a;}
+template<typename T, typename... Args>
+void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 
 using ll = long long;
 using namespace std;
-vii p, r;
-
-int get(int a){
-    if(a != p[a]){
-        p[a] = get(p[a]);
-    }
-    return p[a];
-}
-
-void join(int a, int b){
-    a = get(a);
-    b = get(b);
-    if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
-    p[a] = b;
-    if(r[a] == r[b]){
-        r[b]++;
-    }
-}
 
 void solve(int ccase){
-    int n, m;
-    cin >> n >> m;
-    p = r = vii(n + 1);
-    for(int i = 1; i <= n; i++){
-        p[i] = i;
+    int n, k;
+    cin >> n >> k;
+
+    vii massive(n);
+
+    vector<vector<int>> dp(n + 1, vector<int>(k + 1, 2000000));
+    repeat(n){
+        cin >> massive[_];
     }
-
-    repeat(m){
-        string type;
-        cin >> type;
-
-        int a, b;
-        cin >> a >> b;
-
-        if(type == "union"){
-            join(a, b);
-        } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
+    for(int i = 0; i <= n; i++){
+        dp[i][0] = 0;
+    }
+    sort(all(massive));
+    // for(int i = 0; i <= k; i++){
+    //     dp[0][i] = 0;
+    // }
+    for(int i = 1; i <= n; i++){
+        for(int j = 1; j <= k; j++){
+            int cost = massive[i - 1];
+            if(cost <= j){
+                // dp[][] = min(dp[])
+                int a, b;
+                a = dp[i][j - cost] + 1;
+                b = dp[i - 1][j];
+                dp[i][j] = min(a, b);
+            } else{
+                int b = dp[i - 1][j];
+                dp[i][j] = b;
+            }
         }
     }
-    
+
+    // for(int i = 1; i <= n; i++){
+    //     for(int j = 1; j <= k; j++){
+    //         cout << dp[i][j] << " ";
+    //     }
+    //     cout << ENDL;
+    // }
+
+    // cout << dp[n][k];
+    int ans = dp[n][k];
+
+    if(ans != 2000000){
+        cout << ans;
+    } else{
+        cout << -1;
+    }
+
 }
 
 signed main(){

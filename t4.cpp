@@ -31,7 +31,22 @@
 
 using ll = long long;
 using namespace std;
-vii p, r;
+
+vector<int> p;
+
+struct node{
+    int maximum;
+    int minimum;
+    int r;
+
+    node(){
+        maximum = INT_MIN;
+        minimum = INT_MAX;
+        r = 0;
+    }
+};
+
+vector<node> r;
 
 int get(int a){
     if(a != p[a]){
@@ -43,39 +58,48 @@ int get(int a){
 void join(int a, int b){
     a = get(a);
     b = get(b);
+
     if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
-    p[a] = b;
-    if(r[a] == r[b]){
-        r[b]++;
+
+    if(r[a].r > r[b].r){
+        swap(a, b);
     }
+    r[b].r += r[a].r;
+    p[a] = b;
+    r[b].maximum = max(r[b].maximum, r[a].maximum);
+    r[b].minimum = min(r[b].minimum, r[a].minimum);
 }
+
 
 void solve(int ccase){
     int n, m;
     cin >> n >> m;
-    p = r = vii(n + 1);
+    p = vector<int>(n + 1);
+
+    r = vector<node>(n + 1);
+
     for(int i = 1; i <= n; i++){
         p[i] = i;
+        r[i].r = 1;
+        r[i].maximum = i;
+        r[i].minimum = i;
     }
 
-    repeat(m){
-        string type;
-        cin >> type;
-
+    for(int i = 1; i <= m; i++){
+        string s;
+        cin >> s;
         int a, b;
-        cin >> a >> b;
 
-        if(type == "union"){
-            join(a, b);
+
+        if(s == "get"){
+            cin >> a;
+            a = get(a);
+            cout << r[a].minimum << " " << r[a].maximum << " " << r[a].r << ENDL;
         } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
+            cin >> a >> b;
+            join(a, b);
         }
     }
-    
 }
 
 signed main(){

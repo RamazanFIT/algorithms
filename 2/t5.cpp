@@ -28,54 +28,74 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+template<typename T>
+void get(T &a) {std::cin >> a;}
+template<typename T, typename... Args>
+void get(T &a, Args&... args) {std::cin >> a;get(args...);}
+template<typename T>
+void put(const T &a) {std::cout << a;}
+template<typename T, typename... Args>
+void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 
 using ll = long long;
 using namespace std;
-vii p, r;
-
-int get(int a){
-    if(a != p[a]){
-        p[a] = get(p[a]);
-    }
-    return p[a];
-}
-
-void join(int a, int b){
-    a = get(a);
-    b = get(b);
-    if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
-    p[a] = b;
-    if(r[a] == r[b]){
-        r[b]++;
-    }
-}
 
 void solve(int ccase){
-    int n, m;
-    cin >> n >> m;
-    p = r = vii(n + 1);
-    for(int i = 1; i <= n; i++){
-        p[i] = i;
-    }
+    // -1 -1 -1 [1]
+    // [-1] [1] [1] 1
+    // -2 
+    // 2 
 
-    repeat(m){
-        string type;
-        cin >> type;
+    // -1 
+    // 1
 
-        int a, b;
-        cin >> a >> b;
+    // -1
+    // -2
 
-        if(type == "union"){
-            join(a, b);
-        } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
+    // -1
+    // -1
+
+    // 0 
+    // -1
+    // 0
+    // 0
+    int n;
+    get(n);
+
+    vector<vector<int>> massive(2, vector<int>(n));
+    vector<vector<bool>> boolean(2, vector<bool>(n));
+
+    for(int i = 0; i < 2; i++){
+        for(int j = 0; j < n; j++){
+            get(massive[i][j]);
         }
     }
-    
+    int sum1 = 0;
+    int sum2 = 0;
+
+    vii b(n);
+
+    for(int i = 0; i < n; i++){
+        if(massive[0][i] > massive[1][i]){
+            sum1 += massive[0][i];
+        } else if(massive[0][i] < massive[1][i]){
+            sum2 += massive[1][i];
+        } else{
+            b[i] = 1;
+        }
+    }
+
+    for(int i = 0; i < n; i++){
+        if(b[i]){
+            if(min(sum1 + massive[0][i], sum2 - massive[1][i]) > min(sum1 - massive[0][i], sum2 + massive[1][i])){
+                sum1 += massive[0][i];
+            } else{
+                sum2 += massive[1][i];
+            }
+        }
+    }
+    cout << min(sum1, sum2) << ENDL;
+
 }
 
 signed main(){
@@ -85,7 +105,7 @@ signed main(){
     // freopen("std.out", "w", stdout);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

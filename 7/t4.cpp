@@ -28,64 +28,77 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+template<typename T>
+void get(T &a) {std::cin >> a;}
+template<typename T, typename... Args>
+void get(T &a, Args&... args) {std::cin >> a;get(args...);}
+template<typename T>
+void put(const T &a) {std::cout << a;}
+template<typename T, typename... Args>
+void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 
 using ll = long long;
 using namespace std;
-vii p, r;
 
-int get(int a){
-    if(a != p[a]){
-        p[a] = get(p[a]);
-    }
-    return p[a];
-}
 
-void join(int a, int b){
-    a = get(a);
-    b = get(b);
-    if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
-    p[a] = b;
-    if(r[a] == r[b]){
-        r[b]++;
-    }
-}
+int min(int x, int y, int z) { return min(min(x, y), z); }
 
-void solve(int ccase){
-    int n, m;
-    cin >> n >> m;
-    p = r = vii(n + 1);
-    for(int i = 1; i <= n; i++){
-        p[i] = i;
-    }
+int editDistDP(string str1, string str2, int m, int n)
+{
+    
+    int dp[m + 1][n + 1];
 
-    repeat(m){
-        string type;
-        cin >> type;
+    
+    for (int i = 0; i <= m; i++) {
+        for (int j = 0; j <= n; j++) {
+            
+            
+            if (i == 0)
+                dp[i][j] = j; 
 
-        int a, b;
-        cin >> a >> b;
+            
+            
+            else if (j == 0)
+                dp[i][j] = i; 
 
-        if(type == "union"){
-            join(a, b);
-        } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
+            
+            
+            else if (str1[i - 1] == str2[j - 1])
+                dp[i][j] = dp[i - 1][j - 1];
+
+            
+            
+            else
+                dp[i][j]
+                    = 1
+                      + min(dp[i][j - 1], 
+                            dp[i - 1][j], 
+                            dp[i - 1][j - 1]); 
         }
     }
-    
+
+    return dp[m][n];
+}
+
+
+void solve(int ccase){
+    string str1;
+    string str2;
+    cin >> str1 >> str2;
+
+    cout << editDistDP(str1, str2, str1.length(),
+                       str2.length());
+
 }
 
 signed main(){
     
     goodluck
-    // freopen("std.in", "r", stdin);
-    // freopen("std.out", "w", stdout);
+    
+    
 
     int t = 1;
-    // cin >> t;
+    
     repeat(t) solve(_);
     
 

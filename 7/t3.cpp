@@ -28,53 +28,47 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+template<typename T>
+void get(T &a) {std::cin >> a;}
+template<typename T, typename... Args>
+void get(T &a, Args&... args) {std::cin >> a;get(args...);}
+template<typename T>
+void put(const T &a) {std::cout << a;}
+template<typename T, typename... Args>
+void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 
 using ll = long long;
 using namespace std;
-vii p, r;
 
-int get(int a){
-    if(a != p[a]){
-        p[a] = get(p[a]);
-    }
-    return p[a];
-}
+int lis(vector<int> const& a) {
+    int n = a.size();
+    const int INF = 1e9;
+    vector<int> d(n+1, INF);
+    d[0] = -INF;
 
-void join(int a, int b){
-    a = get(a);
-    b = get(b);
-    if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
-    p[a] = b;
-    if(r[a] == r[b]){
-        r[b]++;
+    for (int i = 0; i < n; i++) {
+        int l = upper_bound(d.begin(), d.end(), a[i]) - d.begin();
+        if (d[l-1] < a[i] && a[i] < d[l])
+            d[l] = a[i];
     }
+
+    int ans = 0;
+    for (int l = 0; l <= n; l++) {
+        if (d[l] < INF)
+            ans = l;
+    }
+    return ans;
 }
 
 void solve(int ccase){
-    int n, m;
-    cin >> n >> m;
-    p = r = vii(n + 1);
-    for(int i = 1; i <= n; i++){
-        p[i] = i;
-    }
+    int n;
+    cin >> n;
+    vector<int> massive(n);
+    repeat(n) cin >> massive[_];
+    
+    cout << lis(massive);
 
-    repeat(m){
-        string type;
-        cin >> type;
-
-        int a, b;
-        cin >> a >> b;
-
-        if(type == "union"){
-            join(a, b);
-        } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
-        }
-    }
+    
     
 }
 
@@ -84,10 +78,7 @@ signed main(){
     // freopen("std.in", "r", stdin);
     // freopen("std.out", "w", stdout);
 
-    int t = 1;
-    // cin >> t;
-    repeat(t) solve(_);
-    
+    solve(1);
 
     endd
 }

@@ -28,54 +28,75 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+template<typename T>
+void get(T &a) {std::cin >> a;}
+template<typename T, typename... Args>
+void get(T &a, Args&... args) {std::cin >> a;get(args...);}
+template<typename T>
+void put(const T &a) {std::cout << a;}
+template<typename T, typename... Args>
+void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 
 using ll = long long;
 using namespace std;
-vii p, r;
 
-int get(int a){
-    if(a != p[a]){
-        p[a] = get(p[a]);
+int rec(int n, int x){
+    if(x > n) return 0;
+    if(x == n) return 1;
+    int sum = 0;
+    for(int i = 1; i <= 6; i++){
+        sum += rec(n, x + i);
     }
-    return p[a];
+
+    return sum;
 }
+int mod = 1e9 + 7;
 
-void join(int a, int b){
-    a = get(a);
-    b = get(b);
-    if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
-    p[a] = b;
-    if(r[a] == r[b]){
-        r[b]++;
-    }
+int binpow(int n, int p){
+    if(p == 0) return 1;
+    if(p == 1) return n % mod;
+
+    int xx = binpow(n, p / 2) % mod;
+
+    if(p % 2 == 0) return (xx * xx) % mod;
+
+    return (xx * xx * n) % mod;
 }
 
 void solve(int ccase){
-    int n, m;
-    cin >> n >> m;
-    p = r = vii(n + 1);
-    for(int i = 1; i <= n; i++){
-        p[i] = i;
+    int n;
+    cin >> n;
+
+    vii dp(n + 3);
+
+    dp[1] = 1;
+    dp[2] = 2;
+    dp[3] = 4;
+    dp[4] = 8;
+    dp[5] = 16;
+    dp[6] = 32;
+
+    for(int i = 7; i <= n; i++){
+        // dp[i] = ((dp[i - 1] % mod) * 2) % mod - 1;
+        dp[i] = (dp[i - 1] % mod + dp[i - 2] % mod + dp[i - 3] % mod + dp[i - 4] % mod + dp[i - 5] % mod + dp[i - 6] % mod) % mod;
     }
 
-    repeat(m){
-        string type;
-        cin >> type;
+    cout << dp[n];
 
-        int a, b;
-        cin >> a >> b;
 
-        if(type == "union"){
-            join(a, b);
-        } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
-        }
-    }
-    
+    // if(n == 7) cout << 63;
+    // else cout << 0;
+    // cout << rec(n, 0);
+    // int sum = 0;
+    // for(int i = 1; i < 16; i++){
+    //     cout << "For " << i << ": ";
+    //     cout << rec(i, 0) << " ";
+    //     sum += rec(i, 0);
+
+    //     cout << sum << " " << ENDL;
+    // }
+
+    // // cout << binpow(2, n - 1);
 }
 
 signed main(){

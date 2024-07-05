@@ -41,9 +41,68 @@ using ll = long long;
 using namespace std;
 
 void solve(int ccase){
-
+    int n;get(n)
+    ;
+    int k;get(k)
+    ;
     
+    deque <int>
+    dq 
+    ;
+    repeat(n)  {
+        int el 
+        ;
+        get(el)
+        ;
+        dq.pb(el);
 
+    }
+    int ans = 0 
+    ;
+    // bool flag = true;
+    int flag = 1;
+    while(!dq.empty()){
+        // if(flag){
+            // put(k, " ");
+            if(k <= 0) break;
+            int f = dq.front();
+            int b = dq.back();
+            flag ^= 1;
+            int m = min(f, b);
+            if(dq.size() == 1){
+                if(m >= k) ans++;
+                break;
+            } else if(f == b){
+                if(2 * m <= k){
+                    dq.pop_back();
+                    dq.pop_front();
+                    k -= 2 * m;
+                } else{
+                    break;
+                }
+            } else if(2 * m <= k){
+                if(m == f){
+                    dq.pop_back();
+                    dq.pop_front();
+                    dq.push_back(b - m);
+                } else if(m == b){
+                    dq.pop_back();
+                    dq.pop_front();
+                    dq.push_front(f - m);
+                }
+                k -= 2 * m;
+                
+            } else{
+                break;
+            }
+        // } else{
+
+        // }
+    }
+    // put(n - dq.size());
+    for(auto it : dq){
+        put(it, " ");
+    }
 }
 
 signed main(){
@@ -53,7 +112,7 @@ signed main(){
     // freopen("std.out", "w", stdout);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

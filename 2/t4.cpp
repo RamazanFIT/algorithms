@@ -28,54 +28,40 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+template<typename T>
+void get(T &a) {std::cin >> a;}
+template<typename T, typename... Args>
+void get(T &a, Args&... args) {std::cin >> a;get(args...);}
+template<typename T>
+void put(const T &a) {std::cout << a;}
+template<typename T, typename... Args>
+void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 
 using ll = long long;
 using namespace std;
-vii p, r;
-
-int get(int a){
-    if(a != p[a]){
-        p[a] = get(p[a]);
-    }
-    return p[a];
-}
-
-void join(int a, int b){
-    a = get(a);
-    b = get(b);
-    if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
-    p[a] = b;
-    if(r[a] == r[b]){
-        r[b]++;
-    }
-}
 
 void solve(int ccase){
-    int n, m;
-    cin >> n >> m;
-    p = r = vii(n + 1);
-    for(int i = 1; i <= n; i++){
-        p[i] = i;
-    }
+    string a, b;
+    get(a, b);
 
-    repeat(m){
-        string type;
-        cin >> type;
+    int cnt = 0;
+    int n = a.size();
+    int m = b.size();
+    int answer = n + m;
 
-        int a, b;
-        cin >> a >> b;
-
-        if(type == "union"){
-            join(a, b);
-        } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
+    for(int i = 0; i < m; i++){
+        int k = i;
+        cnt = 0;
+        for(int j = 0; j < n; j++){
+            if(a[j] == b[k]){
+                k++;
+                cnt++;
+            }
         }
+        answer = min(answer, n + m - cnt);
     }
-    
+    cout << answer << ENDL;
+    // O(N * M); 
 }
 
 signed main(){
@@ -85,7 +71,7 @@ signed main(){
     // freopen("std.out", "w", stdout);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

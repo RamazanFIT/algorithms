@@ -28,53 +28,64 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+template<typename T>
+void get(T &a) {std::cin >> a;}
+template<typename T, typename... Args>
+void get(T &a, Args&... args) {std::cin >> a;get(args...);}
+template<typename T>
+void put(const T &a) {std::cout << a;}
+template<typename T, typename... Args>
+void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 
 using ll = long long;
 using namespace std;
-vii p, r;
 
-int get(int a){
-    if(a != p[a]){
-        p[a] = get(p[a]);
-    }
-    return p[a];
-}
 
-void join(int a, int b){
-    a = get(a);
-    b = get(b);
-    if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
-    p[a] = b;
-    if(r[a] == r[b]){
-        r[b]++;
+int check = 0;
+
+void rec(int xl, int xr, int l, int r){
+    if(r - l == 1){
+        if(l >= xl and l < xr){
+            check = 1;
+        }
+        return;
     }
+
+    if(l >= xl and r <= xr){
+        check = 1;
+        return;
+    }
+
+    int mid = (l + r) / 2;
+
+    rec(xl, xr, l, mid);
+    rec(xl, xr, mid, r);
 }
 
 void solve(int ccase){
-    int n, m;
-    cin >> n >> m;
-    p = r = vii(n + 1);
-    for(int i = 1; i <= n; i++){
-        p[i] = i;
+    int x1, y1, x2, y2;
+    get(x1, y1, x2, y2);
+
+
+    rec(x1, x2, y1, y2 + 1);
+    rec(y1, y2, x1, x2 + 1);
+
+    if(check){
+        cout << "NO";
+    } else{
+        cout << "YES";
     }
 
-    repeat(m){
-        string type;
-        cin >> type;
+//     x1   y1 
+//         x2 y2 
+//      x1   y1 
+// x2     y2
+//     x1        y1 
 
-        int a, b;
-        cin >> a >> b;
-
-        if(type == "union"){
-            join(a, b);
-        } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
-        }
-    }
+//         x2 y2
+//         x2        y2 
+//             x1 y1 
+//     if(x2 >= x1 and y)
     
 }
 

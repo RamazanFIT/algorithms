@@ -15,7 +15,6 @@
 #define ff first 
 #define ss second  
 #define pb push_back
-#define int ll
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define endd return 0;
@@ -28,54 +27,45 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+template<typename T>
+void get(T &a) {std::cin >> a;}
+template<typename T, typename... Args>
+void get(T &a, Args&... args) {std::cin >> a;get(args...);}
+template<typename T>
+void put(const T &a) {std::cout << a;}
+template<typename T, typename... Args>
+void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 
 using ll = long long;
 using namespace std;
-vii p, r;
-
-int get(int a){
-    if(a != p[a]){
-        p[a] = get(p[a]);
-    }
-    return p[a];
-}
-
-void join(int a, int b){
-    a = get(a);
-    b = get(b);
-    if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
-    p[a] = b;
-    if(r[a] == r[b]){
-        r[b]++;
-    }
-}
 
 void solve(int ccase){
-    int n, m;
-    cin >> n >> m;
-    p = r = vii(n + 1);
+    string a, b;
+    get(a, b);
+
+    int n = a.size();
+    int m = b.size();
+    
+    vector<vector<int>> dp(105, vector<int>(105));
+    a = "-" + a;
+    b = "+" + b;
+    
+
     for(int i = 1; i <= n; i++){
-        p[i] = i;
-    }
+        for(int j = 1; j <= m; j++){
+            if(a[i] == b[j]){
+                dp[i][j] = dp[i - 1][j - 1] + 1;
 
-    repeat(m){
-        string type;
-        cin >> type;
+            } else{
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
 
-        int a, b;
-        cin >> a >> b;
-
-        if(type == "union"){
-            join(a, b);
-        } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
+            }
         }
     }
-    
+
+    int answer = n + m - dp[n][m];
+    cout << answer << ENDL;
+
 }
 
 signed main(){
@@ -85,7 +75,7 @@ signed main(){
     // freopen("std.out", "w", stdout);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     repeat(t) solve(_);
     
 

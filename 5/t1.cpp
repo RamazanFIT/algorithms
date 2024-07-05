@@ -28,61 +28,40 @@
 #define print(massive) \
     for(int i = 0; i < massive.size(); i++) cout << massive[i] << " ";
 #define goodluck ios_base::sync_with_stdio(0);cin.tie(NULL);cout.tie(NULL);
+template<typename T>
+void get(T &a) {std::cin >> a;}
+template<typename T, typename... Args>
+void get(T &a, Args&... args) {std::cin >> a;get(args...);}
+template<typename T>
+void put(const T &a) {std::cout << a;}
+template<typename T, typename... Args>
+void put(const T &a, const Args&... args) {std::cout << a;put(args...);}
 
 using ll = long long;
 using namespace std;
-vii p, r;
-
-int get(int a){
-    if(a != p[a]){
-        p[a] = get(p[a]);
-    }
-    return p[a];
-}
-
-void join(int a, int b){
-    a = get(a);
-    b = get(b);
-    if(a == b) return;
-    if(r[a] > r[b]) swap(a, b);
-    p[a] = b;
-    if(r[a] == r[b]){
-        r[b]++;
-    }
-}
 
 void solve(int ccase){
-    int n, m;
-    cin >> n >> m;
-    p = r = vii(n + 1);
-    for(int i = 1; i <= n; i++){
-        p[i] = i;
-    }
+    int n;
+    cin >> n;
 
-    repeat(m){
-        string type;
-        cin >> type;
+    int cnt = 0;
 
-        int a, b;
-        cin >> a >> b;
+    int x1, x2, x3, x4;
 
-        if(type == "union"){
-            join(a, b);
-        } else{
-            if(get(a) == get(b)){
-                cout << "YES" << ENDL;
-            } else 
-                cout << "NO" << ENDL;
-        }
-    }
-    
+    x1 = n / 2;
+    x2 = n / 3 - n / 6;
+    x3 = n / 5 - n / 10 - n / 15 + n / 30;
+    x4 = n / 7 - n / 14 - n / 21 - n / 35 + n / 42 + n / 105 + n / 70 - n / 210;
+    // {2, 3, 6, 5, 10, 15, 30, 7, 14, 21, 35, 42, 105, 70, 210};
+    cout << n - (x1 + x2 + x3 + x4) << ENDL;
+
 }
 
 signed main(){
     
     goodluck
     // freopen("std.in", "r", stdin);
-    // freopen("std.out", "w", stdout);
+    // freopen("std.out1", "w", stdout);
 
     int t = 1;
     // cin >> t;

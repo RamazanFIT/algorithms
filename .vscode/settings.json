@@ -93,6 +93,7 @@
         "iterator": "cpp",
         "sh": "cpp",
         "stdc++.h": "cpp",
-        "charconv": "cpp"
+        "charconv": "cpp",
+        "execution": "cpp"
     }
 }
